@@ -1,0 +1,7 @@
+id|firts_name|last_name|school|hire_date|salary
+1|John|Smith|Montana HS|2011-10-30|36200
+2|Sarah|Lee|Overkruin HS|1993-05-22|33300
+3|Frik|Bruwer|Montana HS|2018-12-18|39600
+4|Louis|Konradi|Menlopark HS|2001-03-14|43200
+5|Erik|Louw|Montana HS|2008-04-18|11200
+6|Kylie|Lamans|Overkruin HS|2014-11-15|55300
