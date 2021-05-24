@@ -26,7 +26,7 @@ while (user_input := input(menu))!= "3":
 	if user_input =="1":
 		prompt_new_entry()
 	elif user_input == "2":
-		view_entries(get_entries())
+		view_entries(get_entries()) 
 	else:
 		print("Invalid option, Please try again!")
 
