@@ -1,10 +1,8 @@
 from typing import List
-from models import Option
+from connections import create_connection
+from models.options import Option
 import database
 
-poll = Poll("Flask vs. Django", "jose", 3)
-poll.add_option("Flask")
-print(poll.options())
 
 class Poll:
     def __init__(self,title: str, owner: str, _id: int = None):
@@ -29,26 +27,26 @@ class Poll:
         connection = create_connection()
         options = database.get_poll_options(connection, self.id)
         connection.Close()
-        return[Option(option[1], option[2], option[0])for option in option
+        return[Option(option[1], option[2], option[0])for option in options]
         
     @classmethod
-    def get(cls; poll_id: int) -> "Poll":
-        connection = create.connection()
+    def get(cls, poll_id: int) -> "Poll":
+        connection = create_connection()
         poll = database.database.get_poll(connection, poll_id)
         connection.close()
-       return cls(poll[1], poll[2], poll[0])
+        return cls(poll[1], poll[2], poll[0])
 
     @classmethod
     def all(cls) -> "Poll":
         connection = create_connection()
-        polls = databse.get_polls(connection)
+        polls = database.get_polls(connection)
         connection.close()
         return [cls(poll[1], poll[2], poll[0]) for poll in polls]
 
     @classmethod
     def latest(cls) -> "Poll":
         connection = create_connection()
-        polls = databse.get_latest_poll(connection)
+        poll = database.get_latest_poll(connection)
         connection.close()
         return cls(poll[1], poll[2], poll[0])
 

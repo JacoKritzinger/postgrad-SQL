@@ -1,6 +1,6 @@
 from connection_pool import DATABASE_PROMPT
-from typing import list
-from connection import create_connection
+from typing import List
+from connections import create_connection
 import database
 
 
@@ -21,12 +21,12 @@ class Option:
 
     @classmethod
     def get(cls, option_id: int) -> "Option":
-        connection = create.connection()
+        connection = create_connection()
         option = database.get_option(connection, option_id)
         connection.close()
         return cls(option[1], option[2], option[0])
 
-    def vote(self, usernme: str):
+    def vote(self, username: str):
         connection = create_connection()
         database.add_poll_vote(connection, username, self.id)
         connection.close()
