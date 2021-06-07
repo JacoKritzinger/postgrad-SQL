@@ -1,3 +1,5 @@
+from typing import List
+from models import Option
 import database
 
 class Poll:
@@ -8,3 +10,15 @@ class Poll:
 
     def __repr__(self):
         return f"Poll({self.title!r}, {self.owmer!r}, {self.id!r})"
+        
+    def save(self):
+        connection = create_connection()
+        new_poll_id = database.creatse_poll(connection, self.title, self.owner)
+        connection.close()
+        self.id =new_poll_id
+
+    def add_option(self, option_text:str):
+        Option(option_text, self.id).save()
+
+    def options(self) -> List[Option]:
+
