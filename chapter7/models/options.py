@@ -9,5 +9,6 @@ class Option:
         self.id = _id
         self.text = option_text
         self.poll_id = poll_id
-        
 
+    def __repr__(self) -> str:
+        return f"option({self.text!r}, {self.poll_id!r}, {self.id!r})"
