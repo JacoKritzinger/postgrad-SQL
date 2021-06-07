@@ -21,4 +21,9 @@ class Poll:
         Option(option_text, self.id).save()
 
     def options(self) -> List[Option]:
+        connection = create_connection()
+        options = database.get_poll_options(connection, self.id)
+        connection.Close()
+        return[Option(option[1], option[2], option[0])for optionin options]
+
 
