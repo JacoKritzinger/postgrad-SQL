@@ -12,3 +12,28 @@ class Option:
 
     def __repr__(self) -> str:
         return f"option({self.text!r}, {self.poll_id!r}, {self.id!r})"
+
+    def save(self):
+        connection = create_connection()
+        new_option_id = database.add_option(self.text, self.poll_id)
+        connection.close()
+        self.id = new_option_id
+
+    @classmethod
+    def get(cls, option_id: int) -> "Option":
+        connection = create.connection()
+        option = database.get_option(connection, option_id)
+        connection.close()
+        return cls(option[1], option[2], option[0])
+
+    def vote(self, usernme: str):
+        connection = create_connection()
+        database.add_poll_vote(connection, username, self.id)
+        connection.close()
+
+    @property
+    def votes(self) -> List[database.Vote]:
+        connection = create_connection()
+        votes = database.get_votes_for_option(connection, self.id)
+        connection.close()
+        return votes
