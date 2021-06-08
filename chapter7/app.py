@@ -1,7 +1,7 @@
 from typing import List
 import random
 import database
-from connection_pool import pool
+from connection_pool import get_connection
 from models.option import Option
 from models.poll import Poll
 
@@ -86,9 +86,9 @@ MENU_OPTIONS = {
 
 
 def menu():
-    connection = pool.getconn()
-    database.create_tables(connection)
-    pool.putconn(connection)
+    with get_connection() as connection:
+        database.create_tables(connection)
+   
 
     while (selection := input(MENU_PROMPT)) != "6":
         try:
