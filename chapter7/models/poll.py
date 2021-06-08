@@ -1,5 +1,5 @@
 from typing import List
-from connections import create_connection
+from connection_pool import pool
 from models.options import Option
 import database
 
@@ -14,9 +14,9 @@ class Poll:
         return f"Poll({self.title!r}, {self.owmer!r}, {self.id!r})"
         
     def save(self):
-        connection = create_connection()
+        connection = pool.getconn()
         new_poll_id = database.creatse_poll(connection, self.title, self.owner)
-        connection.close()
+        pool.putconn(connection)
         self.id =new_poll_id
 
     def add_option(self, option_text:str):
@@ -24,30 +24,30 @@ class Poll:
 
     @property
     def options(self) -> List[Option]:
-        connection = create_connection()
+        connection = pool.getconn()
         options = database.get_poll_options(connection, self.id)
-        connection.Close()
+        pool.putconn(connection)
         return[Option(option[1], option[2], option[0])for option in options]
         
     @classmethod
     def get(cls, poll_id: int) -> "Poll":
-        connection = create_connection()
+        connection = pool.getconn()
         poll = database.database.get_poll(connection, poll_id)
-        connection.close()
+        pool.putconn(connection)
         return cls(poll[1], poll[2], poll[0])
 
     @classmethod
     def all(cls) -> "Poll":
-        connection = create_connection()
+        connection = pool.getconn()
         polls = database.get_polls(connection)
-        connection.close()
+        pool.putconn(connection)
         return [cls(poll[1], poll[2], poll[0]) for poll in polls]
 
     @classmethod
     def latest(cls) -> "Poll":
-        connection = create_connection()
+        connection = pool.getconn()
         poll = database.get_latest_poll(connection)
-        connection.close()
+        pool.putconn(connection)
         return cls(poll[1], poll[2], poll[0])
 
     
