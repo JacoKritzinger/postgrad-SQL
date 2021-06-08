@@ -6,7 +6,7 @@ from psycopg2.extras import execute_values
 Poll = Tuple[int, str, str]
 Option = Tuple[int, str, int]
 Vote = Tuple[str, int]
-PollResults = Tuple[int, str, int, float]
+# PollResults = Tuple[int, str, int, float]
 
 
 CREATE_POLLS = "CREATE TABLE IF NOT EXISTS polls (id SERIAL PRIMARY KEY, title TEXT, owner_username TEXT);"
