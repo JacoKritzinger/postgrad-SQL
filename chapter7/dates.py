@@ -1,15 +1,15 @@
+import datetime
 import pytz
-import json
-
-user_timezone = input("Enter your timezone: ").strip()
-try:
-    pytz.timezone(user_timezone)
-
-except pytz.exeptions.UnknownTimeZoneError:
-    print("that was not a valit timezone.")
-    raise
+import psycopg2
+from dotenv import load_dotenv
 
 
-with open("user_config.json", "w") as config:
-    json.dump({"timezone": user_timezone}, config)
-    
+load_dotenv()
+
+connection = psycopg2.connect(os.environ.get("DATABASE_URI"))
+
+user_timezone = pytz.timezone("Europe/London")
+
+new_post_content = input("Enter what you learned today: ")
+
+new_post_date = user_timezone.localize(datetime.now())
