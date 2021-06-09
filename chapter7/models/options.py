@@ -2,6 +2,8 @@ from connection_pool import DATABASE_PROMPT
 from typing import List
 from connection_pool import get_connection
 import database
+import pytz
+import datetime
 
 
 class Option:
@@ -26,6 +28,7 @@ class Option:
 
     def vote(self, username: str):
         with get_connection() as connection:
+            current_datetime_utc = datetime.datetime.now(tz=pytz.utc)
             database.add_poll_vote(connection, username, self.id)
             
     @property
