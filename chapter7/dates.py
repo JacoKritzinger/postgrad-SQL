@@ -1,3 +1,4 @@
+import os
 import datetime
 import pytz
 import psycopg2
@@ -10,6 +11,15 @@ connection = psycopg2.connect(os.environ.get("DATABASE_URI"))
 
 user_timezone = pytz.timezone("Europe/London")
 
-new_post_content = input("Enter what you learned today: ")
 
-new_post_date = user_timezone.localize(datetime.now())
+with connection:
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM posts;")
+        for post in cursor:
+            _Id, content, timestamp = post
+            naive_datetime = datetime.datetime.utcfromtimestamp(timestamp)
+            utc_date = pytz.utc.localize(naive_datetime)
+            local_date = utc_date.astimezone(user_timezone)
+            print(local_date)
+            print(content)
+                    
