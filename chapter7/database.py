@@ -1,5 +1,4 @@
-from typing import List, Tuple, Callable
-import functools
+from typing import List, Tuple
 from contextlib import contextmanager
 
 from psycopg2.extras import execute_values
@@ -13,7 +12,7 @@ PollResults = Tuple[int, str, int, float]
 
 CREATE_POLLS = "CREATE TABLE IF NOT EXISTS polls (id SERIAL PRIMARY KEY, title TEXT, owner_username TEXT);"
 CREATE_OPTIONS = "CREATE TABLE IF NOT EXISTS options (id SERIAL PRIMARY KEY, option_text TEXT, poll_id INTEGER,FOREIGN KEY(poll_id) REFERENCES polls (id));"
-CREATE_VOTES = "CREATE TABLE IF NOT EXISTS votes (username TEXT, option_id INTEGER vote_timestamp INTEGER, FOREIGN KEY(option_id) REFERENCES option (id));"
+CREATE_VOTES = "CREATE TABLE IF NOT EXISTS votes (username TEXT, option_id INTEGER, vote_timestamp INTEGER, FOREIGN KEY(option_id) REFERENCES option (id));"
 
 
 SELECT_ALL_POLLS = "SELECT * FROM polls;"
