@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 
 figure = plt.figure()
 axes = figure.add_subplot()
@@ -11,6 +12,12 @@ axes.bar(
     color=["#5c44fd", "#ff5566", "#5c44fd", "#ff5566", "#5c44fd", "#ff5566"]
 
 )
+
+handles = [
+    Patch(facecolor = "#5c44fd", label = "Tech"),
+    Patch(facecolor = "#ff5566", label = "Clothing")
+]
+
 
 plt.xticks(rotation = 30, ha="right")
 plt.show()
