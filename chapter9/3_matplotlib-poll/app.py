@@ -18,6 +18,7 @@ handles = [
     Patch(facecolor = "#ff5566", label = "Clothing")
 ]
 
+plt.legend(handles = handles)
 
 plt.xticks(rotation = 30, ha="right")
 plt.show()
