@@ -25,7 +25,7 @@ women_plot = axes.bar(
     
 )
 
-axes.legend(men_plot,women_plot), ("Men", "Women")
+axes.legend((men_plot,women_plot), ("Men", "Women"))
 
 plt.xticks(poll_x_coordinates, poll_titles, rotation = 30, ha = "right")
 
