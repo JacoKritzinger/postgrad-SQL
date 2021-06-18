@@ -29,6 +29,6 @@ axes.legend((men_plot,women_plot), ("Men", "Women"))
 
 plt.xticks(poll_x_coordinates, poll_titles, rotation = 30, ha = "right")
 
-plt.show()
+# plt.show()
 
-figure.savefig("graph1.png", bbox_inches="tight", edgecolor = "5c44fd")
+figure.savefig("graph1.png", bbox_inches="tight", edgecolor = "#5c44fd")
