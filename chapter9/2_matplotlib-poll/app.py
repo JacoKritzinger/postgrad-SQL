@@ -11,4 +11,4 @@ ax2.plot([1, 2, 3, 4], [5, 9, 17, 25])
 
 # plt.show()
 
-figure.savefig("graphs.png", bbox_inches = "tight")
+figure.savefig("graphs2.png", bbox_inches = "tight")
